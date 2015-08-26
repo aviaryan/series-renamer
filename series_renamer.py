@@ -1,7 +1,7 @@
 import os
 import re
 import tvdb_api
-import series_renamer_gui
+#import series_renamer_gui
 from sys import argv
 
 from tvdb_api import tvdb_error
@@ -17,9 +17,10 @@ def main(path):
 	Series Renamer commandline program
 	'''
 
-	print("What's the series name ?")
+	print("What's the series name ? Write it as precise as possible.")
 	sname = input()
 	getNums(path)
+	print("Fetching Series data from TVDB")
 	seriesObj = getSeries(sname)
 
 	print()
@@ -33,12 +34,12 @@ def main(path):
 		dont = done = 0
 		print(i[0])
 		if len(i[1]) > 1:
-			myep,mys = i[1][pep],i[1][ps]
+			myep,mys = i[1][pep], i[1][ps] if ps>=0 else '0'
 		else:
 			myep,mys = i[1][0],'0'
-		print("S " + str(mys) + " , E " + str(myep))
 
 		while done == 0:
+			print("S " + str(mys) + " , E " + str(myep))
 			done = 1
 			if allgo == 0:
 				print(i[1])
@@ -50,17 +51,22 @@ def main(path):
 					dont = 1
 				elif x == 'a': 
 					allgo = 1
-				elif x == 's': 
+				elif x == 's':
 					dont = stop = 1
 					break
 				elif x == '1':
 					print("New season (Give Id) : ", end='')
-					ps = input()
-					mys = i[1][ps]
+					ps = int(input())
+					if ps < 0:
+						mys = '0'
+					else:
+						mys = i[1][int(ps)]
+					done = 0
 				elif x == '2':
 					print('New episode (Give Id) : ', end='')
-					pep = input()
+					pep = int(input())
 					myep = i[1][pep]
+					done = 0
 				else:
 					print('Invalid option. Try Again')
 					done = 0
@@ -102,7 +108,6 @@ def getNums(path):
 			temp = k[0][0] # so using double reference
 			if temp in avoids:
 				continue
-			#print("asd" + k[0])
 			nl.append( re.findall("(\d+(\-\d+)?)", k[0])[0][0] )
 		epns[i[0]] = nl
 
