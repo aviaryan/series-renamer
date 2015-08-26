@@ -78,7 +78,8 @@ def main(path):
 
 def getNums(path):
 	'''
-	Scans the path, looks for series files and gets the episode numbers and season numbers
+	Scans the path, looks for series files and gets contenders of the episode numbers and season numbers.
+	Stores them in epns
 	'''
 
 	exts = ['mkv', 'mp4', 'avi', 'flv']
@@ -133,7 +134,10 @@ def getSeries(sname):
 # More Functions
 
 def getExtension(fname):
-	''' gets extension from the file name '''
+	'''
+	Gets extension from the file name. 
+	Returns without the dot (.)
+	'''
 	a = fname.rfind('.')
 	return fname[a+1:]
 
@@ -142,7 +146,7 @@ def getExtension(fname):
 
 if __name__ == "__main__":
 	s = len(argv)
-	if s > 1:
-		main(argv[1])
+	if len(argv) == 1:
+		main('.')
 	else:
-		series_renamer_gui.main()
+		main(argv[1])
