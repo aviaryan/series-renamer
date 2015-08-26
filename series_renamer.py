@@ -4,6 +4,9 @@ import tvdb_api
 import series_renamer_gui
 from sys import argv
 
+from tvdb_api import tvdb_error
+from tvdb_api import tvdb_shownotfound
+
 
 epns = {}
 namingFormat = '{name}.s{season}e{episode}.{title}'
@@ -17,6 +20,7 @@ def main(path):
 	print("What's the series name ?")
 	sname = input()
 	getNums(path)
+	seriesObj = getSeries(sname)
 
 	print()
 	ps = 0
@@ -31,8 +35,8 @@ def main(path):
 		if len(i[1]) > 1:
 			myep,mys = i[1][pep],i[1][ps]
 		else:
-			myep,mys = i[1][0],0
-		print("Season - " + mys + "\nEpisode - " + myep)
+			myep,mys = i[1][0],'0'
+		print("S " + str(mys) + " , E " + str(myep))
 
 		while done == 0:
 			done = 1
@@ -51,16 +55,19 @@ def main(path):
 					break
 				elif x == '1':
 					print("New season (Give Id) : ", end='')
-					mys = ps = int(input())
+					ps = input()
+					mys = i[1][ps]
 				elif x == '2':
 					print('New episode (Give Id) : ', end='')
-					myep = pep = int(input())
+					pep = input()
+					myep = i[1][pep]
 				else:
 					print('Invalid option. Try Again')
 					done = 0
 
 		if dont == 0:
-			newname = namingFormat.replace('{name}', sname).replace('{season}', mys).replace('{episode}', myep)
+			ext = getExtension(i[0])
+			newname = namingFormat.replace('{name}', sname).replace('{season}', mys).replace('{episode}', myep).replace('{title}', sname) + '.' + ext
 			strLog += i[0] + " -> " + newname + '\n'
 		if stop:
 			break
@@ -79,7 +86,7 @@ def getNums(path):
 	for i in os.listdir(path):
 		if not os.path.isfile(path + '\\' + i):
 			continue
-		ext = getExtenstion(i)
+		ext = getExtension(i)
 		if ext in exts:
 			tobj = re.findall("(?i).\d+(?=[\. \-e$])", i)
 			if len(tobj):
@@ -106,15 +113,25 @@ def getNums(path):
 def getSeries(sname):
 	'''
 	Gets Series data using the TVDB API
+	Throws exception if something goes wrong
 	'''
-	t = tvdb_api.Tvdb()
-	return t[sname]
-	# TODO use exception
+
+	x = 0
+	try:
+		t = tvdb_api.Tvdb()
+		x = t[sname]
+	except tvdb_error:
+		print("There was an error connecting the TVDB API\n")
+	except tvdb_shownotfound:
+		print("Show Not Found on TVDB\n")
+	except Exception:
+		print("There was an error. Tvdb API")
+	return x
 
 
 # More Functions
 
-def getExtenstion(fname):
+def getExtension(fname):
 	''' gets extension from the file name '''
 	a = fname.rfind('.')
 	return fname[a+1:]
