@@ -6,8 +6,7 @@ from sys import argv
 
 
 epns = {}
-seasons = {}
-sname = '{name}.s{season}e{episode}.{title}'
+namingFormat = '{name}.s{season}e{episode}.{title}'
 
 
 def main(path):
@@ -17,13 +16,62 @@ def main(path):
 
 	print("What's the series name ?")
 	sname = input()
-	getEpisodeNos(path)
+	getNums(path)
 
+	print()
+	ps = 0
+	pep = 1
+	allgo = done = dont = stop = 0
+
+	strLog = ''
+
+	for i in epns.items():
+		dont = done = 0
+		print(i[0])
+		if len(i[1]) > 1:
+			myep,mys = i[1][pep],i[1][ps]
+		else:
+			myep,mys = i[1][0],0
+		print("Season - " + mys + "\nEpisode - " + myep)
+
+		while done == 0:
+			done = 1
+			if allgo == 0:
+				print(i[1])
+				print("Yes (y) , No (n) , All (a) , Stop (s) , Season change (1) , Episode change (2)")
+				x = input()
+				if x == 'y': 
+					continue
+				elif x == 'n':
+					dont = 1
+				elif x == 'a': 
+					allgo = 1
+				elif x == 's': 
+					dont = stop = 1
+					break
+				elif x == '1':
+					print("New season (Give Id) : ", end='')
+					mys = ps = int(input())
+				elif x == '2':
+					print('New episode (Give Id) : ', end='')
+					myep = pep = int(input())
+				else:
+					print('Invalid option. Try Again')
+					done = 0
+
+		if dont == 0:
+			newname = namingFormat.replace('{name}', sname).replace('{season}', mys).replace('{episode}', myep)
+			strLog += i[0] + " -> " + newname + '\n'
+		if stop:
+			break
+
+	print(strLog)
 	return 0
 
-def getEpisodeNos(path):
+
+def getNums(path):
 	'''
-	Scans the path, looks for series files and gets the episode numbers and seasons
+	Scans the path, looks for series files and gets the episode numbers and season numbers
 	'''
 
 	exts = ['mkv', 'mp4', 'avi', 'flv']
@@ -33,22 +81,12 @@ def getEpisodeNos(path):
 			continue
 		ext = getExtenstion(i)
 		if ext in exts:
-			tobj = re.findall("(?i)\Ws[a-z]{0,5}\W*\d+", i)
-			if len(tobj):
-				seasons[i] = tobj
-			tobj = re.findall(".\d+(?=[\. \-])", i)
+			tobj = re.findall("(?i).\d+(?=[\. \-e$])", i)
 			if len(tobj):
 				epns[i] = tobj
 
-	# Totally fix the seasons
-	for i in seasons.items():
-		if len(i[1]) != 1:
-			del seasons[i[0]]
-		else:
-			seasons[i[0]] = re.findall("\d+", i[1][0])[0]
 
-
-	# Decide for Episodes
+	# fix 264x things
 	avoids = ['x']
 	for i in epns.items():
 		nl = []
@@ -56,22 +94,13 @@ def getEpisodeNos(path):
 			temp = k[0]
 			if temp in avoids:
 				continue
-			nl.append(k)
+			nl.append( re.findall("\d+", k)[0] )
 		epns[i[0]] = nl
-	
-
-	for k in epns.items():
-		print(k[1])
-
-	for k in seasons.items():
-		print(k)
-		#print(" : " + epns[k])
-	return
 
 
-def make():
-	'''
-	'''
+	# for k in epns.items():
+	# 	print(k[1])
+	# 	#print(" : " + epns[k])
 	return
 
 def getSeries(sname):
