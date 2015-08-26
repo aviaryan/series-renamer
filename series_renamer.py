@@ -88,20 +88,21 @@ def getNums(path):
 			continue
 		ext = getExtension(i)
 		if ext in exts:
-			tobj = re.findall("(?i).\d+(?=[\. \-e$])", i)
+			tobj = re.findall("(?i)(.\d+(\-\d+)?)(?=[\. ex\-\]\)$])", i) # because of 2 () 2 capturing groups
 			if len(tobj):
 				epns[i] = tobj
 
 
 	# fix 264x things
-	avoids = ['x']
+	avoids = []
 	for i in epns.items():
 		nl = []
 		for k in i[1]:
-			temp = k[0]
+			temp = k[0][0] # so using double reference
 			if temp in avoids:
 				continue
-			nl.append( re.findall("\d+", k)[0] )
+			#print("asd" + k[0])
+			nl.append( re.findall("(\d+(\-\d+)?)", k[0])[0][0] )
 		epns[i[0]] = nl
 
 
