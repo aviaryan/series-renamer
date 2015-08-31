@@ -3,14 +3,21 @@ import re
 import tvdb_api
 import shutil, errno
 from sys import argv
+from platform import system
 
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 
 
+# CONFIG
+
+namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_number}}] - {{episodename}}'
+# maxlen
+
+# END CONFIG
+
 # python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer.py"
 epns = {}
-namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_number}}] - {{episodename}}'
 renames = {}
 
 def main(path):
@@ -45,7 +52,7 @@ def main(path):
 			if allgo == 0:
 				print(i[1])
 				print("Yes (y) , No (n) , All (a) , Stop (s) , Season change (1) , Episode change (2)")
-				x = input()
+				x = input().lower()
 				if x == 'y': 
 					continue
 				elif x == 'n':
@@ -102,6 +109,16 @@ def main(path):
 	fpt = open(logfile, 'w')
 	fpt.write(html)
 	fpt.close()
+
+	print("Log created at " + logfile)
+	print("Do you approve renaming ? (y/n)")
+	x = input().lower()
+
+	if x == 'y':
+		for i in renames.items():
+			os.rename(path + '\\' + i[0], path + '\\' + i[1])
+		print('Renaming Successful')
+
 	return 0
 
 
@@ -171,9 +188,23 @@ def makeName(sname, eobj):
 	o = re.findall('\{\{.+?\}\}', s)
 	for i in o:
 		if i == '{{sname}}':
-			s = s.replace(i, sname, 1)
+			s = s.replace(i, fixName(sname), 1)
 		else:
-			s = s.replace(i, eobj[ i[2:-2] ], 1)
+			s = s.replace(i, fixName(eobj[ i[2:-2] ]), 1)
+	return s
+
+
+def fixName(s):
+	'''
+	Removes parts in the string that can't be part of a filename.
+	Eg - : in Windows
+	'''
+	windows = '/\\:*?"<>|'
+
+	if system() == 'Windows':
+		for i in windows:
+			s = s.replace(i,'')
+
 	return s
 
 
