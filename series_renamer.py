@@ -85,7 +85,13 @@ def main(path):
 			title = ''
 			if mys == '0':
 				epd = seriesObj.search(int(myep), key='absolute_number')
-				epd = epd[0]
+				for epds in epd:
+					if epds['absolute_number'] == myep:
+						epd = epds
+						break
+				else:
+					print('Episode not found via absolute_number')
+
 				mys = str(epd['seasonnumber'])
 				title = epd['episodename']
 			else:
@@ -149,7 +155,7 @@ def getNums(path):
 			temp = k[0][0] # so using double reference
 			if temp in avoids:
 				continue
-			nl.append( re.findall("(\d+(\s*\-\s*\d+)?)", k[0])[0][0] )
+			nl.append( re.findall("([1-9]\d+(\s*\-\s*[1-9]\d+)?)", k[0])[0][0] )
 		epns[i[0]] = nl
 
 
