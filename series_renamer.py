@@ -11,7 +11,7 @@ from tvdb_api import tvdb_shownotfound
 
 # CONFIG
 
-# namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_number}}] - {{episodename}}'
+# namingFormat = '{{sname}} E{{absolute_number}} - {{episodename}}'
 namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}}] - {{episodename}}'
 # maxlen
 
@@ -126,6 +126,7 @@ def main(path):
 		for i in renames.items():
 			os.rename(path + '\\' + i[0], path + '\\' + i[1])
 		print('Renaming Successful')
+		os.remove(logfile)
 
 	return 0
 
