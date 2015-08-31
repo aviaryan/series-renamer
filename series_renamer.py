@@ -17,6 +17,7 @@ namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_numbe
 # END CONFIG
 
 # python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer.py"
+ENC = 'utf-8'
 epns = {}
 renames = {}
 
@@ -100,13 +101,13 @@ def main(path):
 
 	logfile = path + '\\series_renamer_log.html'
 	copyanything( os.path.dirname(os.path.realpath(__file__)) + '\\logs.html', logfile )
-	fpt = open(logfile, 'r')
+	fpt = open(logfile, 'r', encoding=ENC)
 	html = fpt.read()
 	fpt.close()
 
 	html = html.replace('{{dir}}', os.getcwd() + '\\' + path, 1)
 	html = html.replace('{{content}}', strLog, 1)
-	fpt = open(logfile, 'w')
+	fpt = open(logfile, 'w', encoding=ENC)
 	fpt.write(html)
 	fpt.close()
 
