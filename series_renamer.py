@@ -1,16 +1,17 @@
 import os
 import re
 import tvdb_api
-#import series_renamer_gui
+import shutil, errno
 from sys import argv
 
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 
 
+# python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer.py"
 epns = {}
-namingFormat = '{name}.s{season}e{episode}.{title}'
-
+namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_number}}] - {{episodename}}'
+renames = {}
 
 def main(path):
 	'''
@@ -73,12 +74,34 @@ def main(path):
 
 		if dont == 0:
 			ext = getExtension(i[0])
-			newname = namingFormat.replace('{name}', sname).replace('{season}', mys).replace('{episode}', myep).replace('{title}', sname) + '.' + ext
-			strLog += i[0] + " -> " + newname + '\n'
+			title = ''
+			if mys == '0':
+				epd = seriesObj.search(int(myep), key='absolute_number')
+				epd = epd[0]
+				mys = str(epd['seasonnumber'])
+				title = epd['episodename']
+			else:
+				epd = seriesObj[ int(mys) ][ int(myep) ]
+				title = epd['episodename']
+
+			newname = makeName(sname, epd) + '.' + ext
+			renames[i[0]] = newname
+			strLog += '<tr><td>' + i[0] + '</td><td>' + newname + '</td></tr>'
+
 		if stop:
 			break
 
-	print(strLog)
+	logfile = path + '\\series_renamer_log.html'
+	copyanything( os.path.dirname(os.path.realpath(__file__)) + '\\logs.html', logfile )
+	fpt = open(logfile, 'r')
+	html = fpt.read()
+	fpt.close()
+
+	html = html.replace('{{dir}}', os.getcwd() + '\\' + path, 1)
+	html = html.replace('{{content}}', strLog, 1)
+	fpt = open(logfile, 'w')
+	fpt.write(html)
+	fpt.close()
 	return 0
 
 
@@ -95,7 +118,7 @@ def getNums(path):
 			continue
 		ext = getExtension(i)
 		if ext in exts:
-			tobj = re.findall("(?i)(.\d+(\-\d+)?)(?=[\. ex\-\]\)$])", i) # because of 2 () 2 capturing groups
+			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]\)\=$])", i) # because of 2 () 2 capturing groups
 			if len(tobj):
 				epns[i] = tobj
 
@@ -108,7 +131,7 @@ def getNums(path):
 			temp = k[0][0] # so using double reference
 			if temp in avoids:
 				continue
-			nl.append( re.findall("(\d+(\-\d+)?)", k[0])[0][0] )
+			nl.append( re.findall("(\d+(\s*\-\s*\d+)?)", k[0])[0][0] )
 		epns[i[0]] = nl
 
 
@@ -116,6 +139,7 @@ def getNums(path):
 	# 	print(k[1])
 	# 	#print(" : " + epns[k])
 	return
+
 
 def getSeries(sname):
 	'''
@@ -136,6 +160,23 @@ def getSeries(sname):
 	return x
 
 
+def makeName(sname, eobj):
+	'''
+	Makes the episode name using the namingFormat
+	sname = Name of the series
+	eobj = Episode Object containing all other data
+	'''
+
+	s = namingFormat
+	o = re.findall('\{\{.+?\}\}', s)
+	for i in o:
+		if i == '{{sname}}':
+			s = s.replace(i, sname, 1)
+		else:
+			s = s.replace(i, eobj[ i[2:-2] ], 1)
+	return s
+
+
 # More Functions
 
 def getExtension(fname):
@@ -147,6 +188,18 @@ def getExtension(fname):
 	return fname[a+1:]
 
 
+def copyanything(src, dst):
+	# copy tree from src to dst
+	# Taken from Stack Overflow (dont have the link)
+	try:
+		shutil.copytree(src, dst)
+	except OSError as exc: # python >2.5
+		if exc.errno == errno.ENOTDIR:
+			shutil.copy(src, dst)
+		else: raise
+	return
+
+
 # Main
 
 if __name__ == "__main__":
@@ -154,4 +207,7 @@ if __name__ == "__main__":
 	if len(argv) == 1:
 		main('.')
 	else:
-		main(argv[1])
+		if len(argv) == 2:
+			main(argv[1])
+		else:
+			main(argv[1])
