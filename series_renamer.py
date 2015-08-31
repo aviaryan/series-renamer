@@ -11,7 +11,8 @@ from tvdb_api import tvdb_shownotfound
 
 # CONFIG
 
-namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_number}}] - {{episodename}}'
+# namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}} = {{absolute_number}}] - {{episodename}}'
+namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}}] - {{episodename}}'
 # maxlen
 
 # END CONFIG
@@ -155,7 +156,7 @@ def getNums(path):
 			temp = k[0][0] # so using double reference
 			if temp in avoids:
 				continue
-			nl.append( re.findall("([1-9]\d+(\s*\-\s*[1-9]\d+)?)", k[0])[0][0] )
+			nl.append( re.findall("([1-9]\d*(\s*\-\s*[1-9]\d*)?)", k[0])[0][0] )
 		epns[i[0]] = nl
 
 
