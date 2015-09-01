@@ -11,8 +11,8 @@ from tvdb_api import tvdb_shownotfound
 
 # CONFIG
 
-# namingFormat = '{{sname}} E{{absolute_number}} - {{episodename}}'
-namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}}] - {{episodename}}'
+namingFormat = '{{sname}} E{{absolute_number}} - {{episodename}}'
+# namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}}] - {{episodename}}'
 # maxlen
 
 # END CONFIG
@@ -144,7 +144,7 @@ def getNums(path):
 			continue
 		ext = getExtension(i)
 		if ext in exts:
-			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]\)\=$])", i) # because of 2 () 2 capturing groups
+			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]$])", i) # because of 2 () 2 capturing groups
 			if len(tobj):
 				epns[i] = tobj
 
@@ -160,10 +160,6 @@ def getNums(path):
 			nl.append( re.findall("([1-9]\d*(\s*\-\s*[1-9]\d*)?)", k[0])[0][0] )
 		epns[i[0]] = nl
 
-
-	# for k in epns.items():
-	# 	print(k[1])
-	# 	#print(" : " + epns[k])
 	return
 
 
@@ -254,7 +250,4 @@ if __name__ == "__main__":
 	if len(argv) == 1:
 		main('.')
 	else:
-		if len(argv) == 2:
-			main(argv[1])
-		else:
-			main(argv[1])
+		main(argv[1])
