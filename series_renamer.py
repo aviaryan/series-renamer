@@ -42,7 +42,7 @@ def main(path):
 
 	for i in epns.items():
 		dont = done = 0
-		print(i[0])
+		print( trimUnicode(i[0]) )
 		if len(i[1]) > 1:
 			myep,mys = i[1][pep], i[1][ps] if ps>=0 else '0'
 		else:
@@ -226,6 +226,13 @@ def getExtension(fname):
 	'''
 	a = fname.rfind('.')
 	return fname[a+1:]
+
+
+def trimUnicode(s):
+	'''
+	Trims string s of unicode text
+	'''
+	return re.sub(r'[^\x00-\x7F]+',' ', s)
 
 
 def copyanything(src, dst):
