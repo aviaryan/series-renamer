@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import tvdb_api
 import shutil, errno
 from sys import argv
@@ -8,25 +9,31 @@ from platform import system
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 
-
-# CONFIG
-
-namingFormat = '{{sname}} E{{absolute_number}} - {{episodename}}'
-# namingFormat = '{{sname}} [{{seasonnumber}}x{{episodenumber}}] - {{episodename}}'
-# maxlen
-
-# END CONFIG
-
 # python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer.py"
+namingFormat = ''
+configs = ''
 ENC = 'utf-8'
 epns = {}
 renames = {}
+
+
+def loadConfig():
+	'''
+	Loads Configuration data from the config.json file
+	'''
+	global namingFormat, configs
+	fpath = os.path.dirname(os.path.realpath(__file__)) + '\\config.json'
+	with open(fpath) as data:
+		configs = json.load(data)
+	namingFormat = configs['namingFormat']
+
 
 def main(path):
 	'''
 	Series Renamer commandline program
 	'''
 
+	loadConfig()
 	print("What's the series name ? Write it as precise as possible.")
 	sname = input()
 	getNums(path)
@@ -83,21 +90,21 @@ def main(path):
 
 		if dont == 0:
 			ext = getExtension(i[0])
-			title = ''
+			r_myep = str2Int(myep)
 			if mys == '0':
-				epd = seriesObj.search(int(myep), key='absolute_number')
+				epd = seriesObj.search(r_myep, key='absolute_number')
 				for epds in epd:
-					if epds['absolute_number'] == myep:
+					if epds['absolute_number'] == str(r_myep):
 						epd = epds
 						break
 				else:
 					print('Episode not found via absolute_number')
 
 				mys = str(epd['seasonnumber'])
-				title = epd['episodename']
+				epd['absolute_number'] = myep.replace(' ','')
 			else:
-				epd = seriesObj[ int(mys) ][ int(myep) ]
-				title = epd['episodename']
+				epd = seriesObj[ int(mys) ][r_myep]
+				epd['episodenumber'] = myep.replace(' ','')
 
 			newname = makeName(sname, epd) + '.' + ext
 			renames[i[0]] = newname
@@ -142,15 +149,19 @@ def getNums(path):
 	for i in os.listdir(path):
 		if not os.path.isfile(path + '\\' + i):
 			continue
-		ext = getExtension(i)
+		fname = i
+		ext = getExtension(fname)
+		for k in configs['replaces'].items():
+			fname = fname.replace(k[0], k[1])
 		if ext in exts:
-			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]$])", i) # because of 2 () 2 capturing groups
+			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]$])", fname) # because of 2 () 2 capturing groups
 			if len(tobj):
 				epns[i] = tobj
 
 
-	# fix 264x things
-	avoids = []
+	# check using prefix to nums
+	# currently found none, everything is plausible
+	avoids = ['~']
 	for i in epns.items():
 		nl = []
 		for k in i[1]:
@@ -232,8 +243,10 @@ def trimUnicode(s):
 
 
 def copyanything(src, dst):
-	# copy tree from src to dst
-	# Taken from Stack Overflow (dont have the link)
+	'''
+	copy tree from src to dst
+	Taken from Stack Overflow (dont have the link)
+	'''
 	try:
 		shutil.copytree(src, dst)
 	except OSError as exc: # python >2.5
@@ -242,6 +255,13 @@ def copyanything(src, dst):
 		else: raise
 	return
 
+def str2Int(num):
+	'''
+	Converts string to int
+	If form of 324-325, it returns 324 i.e. the former number
+	'''
+	n = re.findall('[1-9]\d*', str(num))
+	return int(n[0])
 
 # Main
 
