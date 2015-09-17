@@ -150,11 +150,11 @@ def getNums(path):
 		if not os.path.isfile(path + '\\' + i):
 			continue
 		fname = i
-		ext = getExtension(fname)
+		ext = getExtension(fname).lower()
 		for k in configs['replaces'].items():
 			fname = fname.replace(k[0], k[1])
 		if ext in exts:
-			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]$])", fname) # because of 2 () 2 capturing groups
+			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]$])", fname, re.DOTALL) # because of 2 () 2 capturing groups
 			if len(tobj):
 				epns[i] = tobj
 
