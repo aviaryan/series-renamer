@@ -4,12 +4,13 @@ import json
 import tvdb_api
 import shutil, errno
 from sys import argv
+from sys import exit as sysexit
 from platform import system
 
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 
-# python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer.py"
+# python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer\series_renamer.py"
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'
@@ -126,8 +127,7 @@ def main(path='.'):
 			# check namingformat agains all available attributes
 			tempmissing = isNameInvalid(epd)
 			if tempmissing:
-				print('ERROR : Naming Format (', namingFormat, ') is invalid for tvdb data. Reason : missing', tempmissing)
-				stop = 1
+				warn('Naming Format ( ' + namingFormat + ' ) is invalid for tvdb data. Reason : missing ' + tempmissing)
 			else:
 				newname = makeName(sname, epd) + '.' + ext
 				renames[i[0]] = newname
@@ -211,11 +211,11 @@ def getSeries(sname):
 		t = tvdb_api.Tvdb()
 		x = t[sname]
 	except tvdb_error:
-		print("There was an error connecting the TVDB API\n")
+		throwError("There was an error connecting the TVDB API")
 	except tvdb_shownotfound:
-		print("Show Not Found on TVDB\n")
+		throwError("Show Not Found on TVDB")
 	except Exception:
-		print("There was an error. Tvdb API")
+		throwError("There was an error. Tvdb API")
 	return x
 
 
@@ -304,12 +304,23 @@ def str2Int(num):
 	n = re.findall('[1-9]\d*', str(num))
 	return int(n[0])
 
+
+def warn(msg):
+	"""
+	Gives a warning
+	"""
+	print("WARNING :", msg)
+
+
+def throwError(msg):
+	"""
+	Throws error and exists
+	"""
+	print("ERROR :", msg)
+	sysexit()
+
+
 # Main
 
 if __name__ == "__main__":
-	# s = len(argv)
-	# if len(argv) == 1:
-	# DONT TAKE ARGS
 	main()
-	# else:
-	# 	main(argv[1])
