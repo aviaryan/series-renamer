@@ -123,12 +123,20 @@ def main(path='.'):
 				epd = seriesObj[ int(mys) ][r_myep]
 				epd['episodenumber'] = myep.replace(' ','')
 
-			newname = makeName(sname, epd) + '.' + ext
-			renames[i[0]] = newname
-			strLog += '<tr><td>' + i[0] + '</td><td>' + newname + '</td></tr>'
+			tempmissing = isNameInvalid(epd)
+			if tempmissing:
+				print('ERROR : Naming Format (', namingFormat, ') is invalid for tvdb data. Reason : missing', tempmissing)
+				stop = 1
+			else:
+				newname = makeName(sname, epd) + '.' + ext
+				renames[i[0]] = newname
+				strLog += '<tr><td>' + i[0] + '</td><td>' + newname + '</td></tr>'
 
 		if stop:
 			break
+
+	if stop:
+		return 0
 
 	logfile = path + '\\series_renamer_log.html'
 	copyanything( os.path.dirname(os.path.realpath(__file__)) + '\\logs.html', logfile )
@@ -171,7 +179,7 @@ def getNums(path):
 		for k in configs['replaces'].items():
 			fname = fname.replace(k[0], k[1])
 		if ext in exts:
-			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]$])", fname, re.DOTALL) # because of 2 () 2 capturing groups
+			tobj = re.findall("(?i)(.\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]\)\(\[$])", fname, re.DOTALL) # because of 2 () 2 capturing groups
 			if len(tobj):
 				epns[i] = tobj
 
@@ -225,6 +233,21 @@ def makeName(sname, eobj):
 		else:
 			s = s.replace(i, fixName(eobj[ i[2:-2] ]), 1)
 	return s
+
+
+def isNameInvalid(epd):
+	"""
+	Checks the namingFormat against the episode data to see if every request attribute is present
+	"""
+	o = re.findall('\{\{(.+?)\}\}', namingFormat)
+	for i in o:
+		if i == 'sname':
+			continue
+		if i not in epd:
+			return i
+		if epd[i] is None:
+			return i
+	return 0
 
 
 def fixName(s):
