@@ -24,10 +24,11 @@ setup(
         "Topic :: Utilities",
         "License :: Apache License v2.0",
     ],
+    include_package_data=True, # needed for MANIFEST
 
     entry_points={
         'console_scripts': [
-            'series-renamer = series_renamer.series_renamer:main',
+            'series-renamer = series_renamer.series_renamer:run',
         ],
     }
 )

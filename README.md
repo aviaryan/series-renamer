@@ -18,7 +18,7 @@ So I decided to make my own *series renamer*. To be able to rename (fix) even ba
 ## Installing
 
 ```
-easy_install something
+python setup.py install
 ```
 
 

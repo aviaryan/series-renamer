@@ -28,6 +28,13 @@ def loadConfig():
 	namingFormat = configs['namingFormat']
 
 
+def run():
+	"""
+	Runs the script from the setuptools entry point
+	"""
+	main( os.getcwd() )
+
+
 def main(path='.'):
 	"""
 	Series Renamer commandline program
