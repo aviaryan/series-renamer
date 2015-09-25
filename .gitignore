@@ -1,0 +1,7 @@
+__pycache__
+series_renamer.spec
+build
+dist
+series_renamer.egg-info
+.idea
+test.py
