@@ -18,9 +18,9 @@ renames = {}
 
 
 def loadConfig():
-	'''
+	"""
 	Loads Configuration data from the config.json file
-	'''
+	"""
 	global namingFormat, configs
 	fpath = os.path.dirname(os.path.realpath(__file__)) + '\\config.json'
 	with open(fpath) as data:
@@ -29,9 +29,9 @@ def loadConfig():
 
 
 def main(path):
-	'''
+	"""
 	Series Renamer commandline program
-	'''
+	"""
 
 	loadConfig()
 	print("What's the series name ? Write it as precise as possible.")
@@ -139,10 +139,10 @@ def main(path):
 
 
 def getNums(path):
-	'''
+	"""
 	Scans the path, looks for series files and gets contenders of the episode numbers and season numbers.
 	Stores them in epns
-	'''
+	"""
 
 	exts = ['mkv', 'mp4', 'avi', 'flv', 'mpg', 'mpeg', 'wmv']
 
@@ -175,10 +175,10 @@ def getNums(path):
 
 
 def getSeries(sname):
-	'''
+	"""
 	Gets Series data using the TVDB API
 	Throws exception if something goes wrong
-	'''
+	"""
 
 	x = 0
 	try:
@@ -194,11 +194,11 @@ def getSeries(sname):
 
 
 def makeName(sname, eobj):
-	'''
+	"""
 	Makes the episode name using the namingFormat
 	sname = Name of the series
 	eobj = Episode Object containing all other data
-	'''
+	"""
 
 	s = namingFormat
 	o = re.findall('\{\{.+?\}\}', s)
@@ -211,10 +211,10 @@ def makeName(sname, eobj):
 
 
 def fixName(s):
-	'''
+	"""
 	Removes parts in the string that can't be part of a filename.
 	Eg - : in Windows
-	'''
+	"""
 	windows = '/\\:*?"<>|'
 
 	if system() == 'Windows':
@@ -227,26 +227,26 @@ def fixName(s):
 # More Functions
 
 def getExtension(fname):
-	'''
+	"""
 	Gets extension from the file name. 
 	Returns without the dot (.)
-	'''
+	"""
 	a = fname.rfind('.')
 	return fname[a+1:]
 
 
 def trimUnicode(s):
-	'''
+	"""
 	Trims string s of unicode text
-	'''
+	"""
 	return re.sub(r'[^\x00-\x7F]+',' ', s)
 
 
 def copyanything(src, dst):
-	'''
+	"""
 	copy tree from src to dst
 	Taken from Stack Overflow (dont have the link)
-	'''
+	"""
 	try:
 		shutil.copytree(src, dst)
 	except OSError as exc: # python >2.5
@@ -256,10 +256,10 @@ def copyanything(src, dst):
 	return
 
 def str2Int(num):
-	'''
+	"""
 	Converts string to int
 	If form of 324-325, it returns 324 i.e. the former number
-	'''
+	"""
 	n = re.findall('[1-9]\d*', str(num))
 	return int(n[0])
 
