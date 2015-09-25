@@ -48,7 +48,7 @@ def main(path='.'):
 	seriesObj = getSeries(sname)
 
 	print()
-	ps = 0
+	ps = '0'
 	pep = 1
 	allgo = done = dont = stop = 0
 
@@ -57,10 +57,18 @@ def main(path='.'):
 	for i in epns.items():
 		dont = done = 0
 		print( trimUnicode(i[0]) )
-		if len(i[1]) > 1:
-			myep,mys = i[1][pep], i[1][ps] if ps>=0 else '0'
+		# season
+		if ps[0] == '#':
+			mys = int(ps[1:])
+		elif len(i[1]) > 1:
+			mys = i[1][int(ps)] if int(ps)>=0 else 0
 		else:
-			myep,mys = i[1][0],'0'
+			mys = 0
+		# episode
+		if len(i[1]) > 1:
+			myep = i[1][pep]
+		else:
+			myep= i[1][0]
 
 		while done == 0:
 			print("S " + str(mys) + " , E " + str(myep))
@@ -80,9 +88,11 @@ def main(path='.'):
 					break
 				elif x == '1':
 					print("New season (Give Id) : ", end='')
-					ps = int(input())
-					if ps < 0:
-						mys = '0'
+					ps = input()
+					if ps[0] == '#':
+						mys = int(ps[1:])
+					elif int(ps) < 0:
+						mys = 0
 					else:
 						mys = i[1][int(ps)]
 					done = 0
@@ -98,7 +108,7 @@ def main(path='.'):
 		if dont == 0:
 			ext = getExtension(i[0])
 			r_myep = str2Int(myep)
-			if mys == '0':
+			if mys == 0:
 				epd = seriesObj.search(r_myep, key='absolute_number')
 				for epds in epd:
 					if epds['absolute_number'] == str(r_myep):
