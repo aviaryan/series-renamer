@@ -3,7 +3,7 @@ import re
 import json
 import tvdb_api
 import shutil, errno
-import subprocess
+from subprocess import call as call
 from sys import argv
 from sys import exit as sysexit
 from platform import system
@@ -36,11 +36,11 @@ def editConfig():
 	"""
 	fpath = os.path.dirname(os.path.realpath(__file__)) + '\\config.json'
 	if system() == 'darwin':
-		subprocess.call(('open', fpath))
+		call(('open', fpath))
 	elif os.name == 'nt':
 		os.startfile(fpath)
 	elif os.name == 'posix':
-		subprocess.call(('xdg-open', fpath))
+		call(('xdg-open', fpath))
 
 
 def run():
