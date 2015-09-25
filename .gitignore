@@ -5,3 +5,7 @@ dist
 series_renamer.egg-info
 .idea
 test.py
+_site
+assets/css
+assets/fonts
+*.js

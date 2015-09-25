@@ -1,0 +1,23 @@
+name: Series Renamer
+markdown: redcarpet
+fullpath: http://aviaryan.in/series-renamer
+description: Robust series renamer in Python
+baseurl: 
+permalink: /blog/:categories/:title.html
+title: Series Renamer
+paginate: 10
+highlighter: rouge
+
+# More
+author:
+    fullname: Avi Aryan
+    twitter: aviaryan123
+    github: aviaryan
+    facebook: avi.aryan.ap
+    google: AviAryan
+    gplusid: 110328513842183229282
+
+googleverify: gC8gMLC1UpPDYi2y5KR_9Sq79n4TYMiQM7UcSvtyfms
+disqusid: avi-aryan-github
+disqusurl: http://aviaryan.in
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']

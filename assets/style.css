@@ -1,0 +1,26 @@
+div.container {
+	max-width: 1000px;
+}
+
+div#texts {
+	margin-top: 80px;
+}
+
+.scrollspynav {
+	position:relative;
+	margin-top:10px;
+	overflow: auto;
+}
+
+div.highlight {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+h2 {
+	padding-top: 30px;
+}
+
+#navbar-right {
+	margin-top: 30px;
+}
