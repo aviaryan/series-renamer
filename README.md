@@ -38,7 +38,7 @@ series-renamer
 
 ## Examples
 
-Some sample logs created by series-renamer can be found in the [examples](examples) folder. You can view them online via [https://htmlpreview.github.io](https://htmlpreview.github.io/).
+Some sample logs created by series-renamer can be found in the [examples](https://github.com/aviaryan/series-renamer/tree/gh-pages/examples) folder. You can view them from [this link](http://aviaryan.github.io/series-renamer/examples/index.html)
 
 
 ## Important
