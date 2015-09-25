@@ -88,7 +88,7 @@ def main(path='.'):
 					dont = stop = 1
 					break
 				elif x == '1':
-					print("New season (Give Id) : ", end='')
+					print('New season (-1, 0-{0}, #NUM) : '.format(len(i[1])-1), end='')
 					ps = input()
 					if ps[0] == '#':
 						mys = int(ps[1:])
@@ -98,7 +98,7 @@ def main(path='.'):
 						mys = i[1][int(ps)]
 					done = 0
 				elif x == '2':
-					print('New episode (Give Id) : ', end='')
+					print('New episode (0-{0}) : '.format(len(i[1])-1), end='')
 					pep = int(input())
 					myep = i[1][pep]
 					done = 0
@@ -116,7 +116,8 @@ def main(path='.'):
 						epd = epds
 						break
 				else:
-					print('Episode not found via absolute_number')
+					warn('Episode not found via absolute_number, skipping')
+					continue
 
 				mys = str(epd['seasonnumber'])
 				epd['absolute_number'] = myep.replace(' ','')
@@ -159,8 +160,8 @@ def main(path='.'):
 		for i in renames.items():
 			os.rename(path + '\\' + i[0], path + '\\' + i[1])
 		print('Renaming Successful')
-		os.remove(logfile)
 
+	os.remove(logfile)
 	return 0
 
 
@@ -305,17 +306,27 @@ def str2Int(num):
 	return int(n[0])
 
 
+def drawline(char, msg):
+	"""
+	Draws a line in the terminal
+	"""
+	print(char * (len(msg)+10))
+
+
 def warn(msg):
 	"""
 	Gives a warning
 	"""
+	drawline('>', msg)
 	print("WARNING :", msg)
+	drawline('>', msg)
 
 
 def throwError(msg):
 	"""
 	Throws error and exists
 	"""
+	drawline('#', msg)
 	print("ERROR :", msg)
 	sysexit()
 
