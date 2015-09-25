@@ -5,3 +5,4 @@ dist
 series_renamer.egg-info
 .idea
 test.py
+examples
