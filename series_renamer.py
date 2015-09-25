@@ -28,7 +28,7 @@ def loadConfig():
 	namingFormat = configs['namingFormat']
 
 
-def main(path):
+def main(path='.'):
 	"""
 	Series Renamer commandline program
 	"""
