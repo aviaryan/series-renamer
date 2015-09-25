@@ -56,7 +56,6 @@ def main(path='.'):
 
 	for i in epns.items():
 		dont = done = 0
-		print( trimUnicode(i[0]) )
 		# season
 		if ps[0] == '#':
 			mys = int(ps[1:])
@@ -71,6 +70,7 @@ def main(path='.'):
 			myep= i[1][0]
 
 		while done == 0:
+			print( trimUnicode(i[0]) )
 			print("S " + str(mys) + " , E " + str(myep))
 			done = 1
 			if allgo == 0:
@@ -123,6 +123,7 @@ def main(path='.'):
 				epd = seriesObj[ int(mys) ][r_myep]
 				epd['episodenumber'] = myep.replace(' ','')
 
+			# check namingformat agains all available attributes
 			tempmissing = isNameInvalid(epd)
 			if tempmissing:
 				print('ERROR : Naming Format (', namingFormat, ') is invalid for tvdb data. Reason : missing', tempmissing)
@@ -144,7 +145,7 @@ def main(path='.'):
 	html = fpt.read()
 	fpt.close()
 
-	html = html.replace('{{dir}}', os.getcwd() + '\\' + path, 1)
+	html = html.replace('{{dir}}', os.getcwd(), 1)
 	html = html.replace('{{content}}', strLog, 1)
 	fpt = open(logfile, 'w', encoding=ENC)
 	fpt.write(html)
@@ -306,8 +307,9 @@ def str2Int(num):
 # Main
 
 if __name__ == "__main__":
-	s = len(argv)
-	if len(argv) == 1:
-		main('.')
-	else:
-		main(argv[1])
+	# s = len(argv)
+	# if len(argv) == 1:
+	# DONT TAKE ARGS
+	main()
+	# else:
+	# 	main(argv[1])
