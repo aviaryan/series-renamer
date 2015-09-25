@@ -34,3 +34,13 @@ series-renamer
 * Choose the appropriate option and move forward.
 * In the end the script will create a log (series-renamer-log.html) in the root of the folder that was currently examined.
 * Confirm with (y) and all episodes in the folder will be renamed.
+
+
+## Examples
+
+Some sample logs created by series-renamer can be found in the [examples](examples) folder. You can view them online via [https://htmlpreview.github.io](https://htmlpreview.github.io/).
+
+
+## Important
+
+It is recommended you read [How to rename](docs/how_to_rename.md) to be fully comfortable with Series Renamer.
