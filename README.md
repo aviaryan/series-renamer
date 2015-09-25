@@ -10,13 +10,14 @@ Now my One Piece episodes are named like `opdub283.mp4` . How do you expect them
 
 So I decided to make my own *series renamer*. To be able to rename (fix) even badly named files like the above, my script -
 
-* accepts folder to scan as the parameter
+* takes a folder non-recursively
 * gets the name of the TV/Anime series the folder contains from the user
 * scans through the filenames for potential season numbers / episode numbers. Once you have the Series name and the Season/Episode accurate, nothing can stop your tv series collection from having a proper name.
 
 
 ## Installing
 
+Download the zip.
 ```
 python setup.py install
 ```
@@ -24,11 +25,9 @@ python setup.py install
 
 ## Using
 
-* Run the script optionally passing the directory to scan as the parameter
+* Open **command prompt** aka **terminal** in the directory you want to scan and run the following command.
 ```bash
-python series-renamer.py <path-to-folder>
-# or
-# python series-renamer.py
+series-renamer
 ```
 * Give the series name. Make sure you write the name as precisely as possible.
 * The script will connect to TVDB and then scan the filenames. After that it will give you suggestions on the season numbers/episode numbers of files.
