@@ -3,6 +3,7 @@ import re
 import json
 import tvdb_api
 import shutil, errno
+import subprocess
 from sys import argv
 from sys import exit as sysexit
 from platform import system
@@ -27,6 +28,19 @@ def loadConfig():
 	with open(fpath) as data:
 		configs = json.load(data)
 	namingFormat = configs['namingFormat']
+
+
+def editConfig():
+	"""
+	Opens the config in default editor
+	"""
+	fpath = os.path.dirname(os.path.realpath(__file__)) + '\\config.json'
+	if system() == 'darwin':
+		subprocess.call(('open', fpath))
+	elif os.name == 'nt':
+		os.startfile(fpath)
+	elif os.name == 'posix':
+		subprocess.call(('xdg-open', fpath))
 
 
 def run():
@@ -94,13 +108,14 @@ def main(path='.'):
 						mys = int(ps[1:])
 					elif int(ps) < 0:
 						mys = 0
-					else:
+					elif int(ps) < len(i[1]):
 						mys = i[1][int(ps)]
 					done = 0
 				elif x == '2':
 					print('New episode (0-{0}) : '.format(len(i[1])-1), end='')
 					pep = int(input())
-					myep = i[1][pep]
+					if pep < len(i[1]) and pep >= 0:
+						myep = i[1][pep]
 					done = 0
 				else:
 					print('Invalid option. Try Again')

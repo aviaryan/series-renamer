@@ -29,6 +29,7 @@ setup(
     entry_points={
         'console_scripts': [
             'series-renamer = series_renamer.series_renamer:run',
+            'series-renamer-config = series_renamer.series_renamer:editConfig',
         ],
     }
 )
