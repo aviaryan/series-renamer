@@ -5,7 +5,6 @@ description: Robust series renamer in Python
 baseurl: 
 permalink: /blog/:categories/:title.html
 title: Series Renamer
-paginate: 10
 highlighter: rouge
 
 # More

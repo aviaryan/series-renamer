@@ -24,3 +24,11 @@ h2 {
 #navbar-right {
 	margin-top: 30px;
 }
+
+.footer {
+	margin-top: 40px;
+	background-color: #F6F6F6;
+	padding: 10px 0px 10px 0px;
+	border-top: 1px solid #D7D7D7;
+	color: #5E5E5E;
+}

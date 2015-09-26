@@ -43,7 +43,7 @@ For changing season number, it's 1 whereas for episode number, it's 2.
 
 When changing season number, you can put these types of values.
 
-* `#N` - Explictly speciify the season number `N`. This season number value will be used for all future episodes and so it is highly recommend to use this option only when the folder being scanned has episodes from a single season.
+* `#N` - Explicitly specify the season number `N`. This season number value will be used for all future episodes and so it is highly recommend to use this option only when the folder being scanned has episodes from a single season.
 * `N` where `N` is a positive/zero number - Changes the season number to the `N`th item in array i.e. changes season index to `N`. This index will be remembered for future episodes. Please keep in mind that here array starts from 0.
 * `-1` - Sets the season to 0 meaning no season. In this case, episode is looked through its absolute number of episode.
 
@@ -84,7 +84,7 @@ Therefore replaces became -
 }
 ```
 
-NOTE - To prevent some number from being detected by series-renamer, preceed it by ~ (tilde). Example my beyblade episode was like *Beyblade 145 03.mp4*, where 145 was some number that gave nothing useful. So I replaced 'Beyblade ' with '~'.
+NOTE - To prevent some number from being detected by series-renamer, precede it by ~ (tilde). Example my beyblade episode was like *Beyblade 145 03.mp4*, where 145 was some number that gave nothing useful. So I replaced 'Beyblade ' with '~'.
 
 ```json
 "replaces": {
