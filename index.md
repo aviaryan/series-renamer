@@ -9,7 +9,7 @@ Series Renamer is a robust TV series renaming command-line application written i
 
 To start using it, you first need to install the script. For that, please follow these steps -
 
-* Download zip and extract it.
+* [Download zip](https://github.com/aviaryan/series-renamer/releases) and extract it.
 * From the extracted folder, run
 
 ```bash
@@ -37,7 +37,7 @@ series-renamer
 <a name="numbers"></a>
 <h2 id="numbers">Season and Episode Numbers</h2>
 The Season and Episode numbers are the base of Series Renamer. It scans through the file names and extracts the numbers which it thinks can be season number or episode number. 
-When in the user confirmation phase, it displays the detected season and episode number and gives option to the user to change it if need.
+When in the user confirmation phase, it displays the detected season and episode number and gives option to the user to change it if need. Multi-episodes are supported as long as they are of the format *StartEp*-*EndEp* (example, *Friends [10x23-24] - The Last One.mkv*).
 
 For changing season number, it's 1 whereas for episode number, it's 2.
 
@@ -71,9 +71,9 @@ The format to rename episodes. variables are enclosed in \{\{..\}\}. Common vari
 
 **replaces**
 
-Temporary find-and-replace script does when scanning file paths. This feature can be used to rule out unwanted potential numbers and even fix detected numbers.
+Temporary find-and-replace script does when scanning file names for numbers. This feature can be used to rule out unwanted potential numbers and even fix detected numbers.
 
-For example, my One Piece episodes had names like *one piece 657 -u0026 658.mp4*. Now as series-renamer only detects `N1 - N2` as multi-episode, so I replaced '-u0026' with '-'.
+For example, my [One Piece episodes](examples/one_piece_mixed.html) had names like *one piece 657 -u0026 658.mp4*. Now as series-renamer only detects `N1 - N2` as multi-episode, so I replaced '-u0026' with '-'.
 Also some episodes were like *one piece 456 & 457 blah blah YouTube.mp4*. So I also replaced '&' with '-'.
 Therefore replaces became - 
 
@@ -84,7 +84,7 @@ Therefore replaces became -
 }
 ```
 
-**NOTE** - To prevent some number from being detected by series-renamer, preceed it by ~ (tilde). Example my beyblade episode was like *Beyblade 145 03.mp4*, where 145 was some number that gave nothing useful. So I replaced 'Beyblade ' with '~'.
+NOTE - To prevent some number from being detected by series-renamer, preceed it by ~ (tilde). Example my beyblade episode was like *Beyblade 145 03.mp4*, where 145 was some number that gave nothing useful. So I replaced 'Beyblade ' with '~'.
 
 ```json
 "replaces": {
@@ -92,3 +92,7 @@ Therefore replaces became -
 }
 ```
 
+
+<a name="examples"></a>
+<h2 id="examples">Examples</h2>
+Some sample logs created by series-renamer can be viewed from [examples/index.html](examples/index.html). To rename such badly named episodes, the 'replaces' config came very useful. 
