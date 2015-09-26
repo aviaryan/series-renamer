@@ -9,7 +9,7 @@ Series Renamer is a robust TV series renaming command-line application written i
 
 To start using it, you first need to install the script. For that, please follow these steps -
 
-* [Download zip](https://github.com/aviaryan/series-renamer/releases) and extract it.
+* [Download zip](https://github.com/aviaryan/series-renamer/archive/master.zip) and extract it.
 * From the extracted folder, run
 
 ```bash
