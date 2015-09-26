@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 import re
 import json
@@ -6,12 +8,14 @@ import shutil, errno
 from subprocess import call as call
 from sys import argv
 from sys import exit as sysexit
+from sys import version_info
 from platform import system
 
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 
-# python "C:\Users\Avi\Documents\GitHub\series-renamer\series_renamer\series_renamer.py"
+# if version_info < (3,0):
+
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'

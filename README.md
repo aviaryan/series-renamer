@@ -53,3 +53,10 @@ Some sample logs created by series-renamer can be found in the [examples](https:
 ## Important
 
 It is recommended you read [some docs](http://aviaryan.github.io/series-renamer/index.html#numbers) to be fully comfortable with Series Renamer.
+
+
+## Requirements
+
+* tvdb-api
+* Python 3
+
