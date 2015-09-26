@@ -28,7 +28,7 @@ def loadConfig():
 	Loads Configuration data from the config.json file
 	"""
 	global namingFormat, configs
-	fpath = os.path.dirname(os.path.realpath(__file__)) + '\\config.json'
+	fpath = os.path.dirname(os.path.realpath(__file__)) + '/config.json'
 	with open(fpath) as data:
 		configs = json.load(data)
 	namingFormat = configs['namingFormat']
@@ -38,7 +38,7 @@ def editConfig():
 	"""
 	Opens the config in default editor
 	"""
-	fpath = os.path.dirname(os.path.realpath(__file__)) + '\\config.json'
+	fpath = os.path.dirname(os.path.realpath(__file__)) + '/config.json'
 	if system() == 'darwin':
 		call(('open', fpath))
 	elif os.name == 'nt':
@@ -163,8 +163,8 @@ def main(path='.'):
 	if stop:
 		return 0
 
-	logfile = path + '\\series_renamer_log.html'
-	copyanything( os.path.dirname(os.path.realpath(__file__)) + '\\logs.html', logfile )
+	logfile = path + '/series_renamer_log.html'
+	copyanything( os.path.dirname(os.path.realpath(__file__)) + '/logs.html', logfile )
 	fpt = open(logfile, 'r', encoding=ENC)
 	html = fpt.read()
 	fpt.close()
@@ -181,7 +181,7 @@ def main(path='.'):
 
 	if x == 'y':
 		for i in renames.items():
-			os.rename(path + '\\' + i[0], path + '\\' + i[1])
+			os.rename(path + '/' + i[0], path + '/' + i[1])
 		print('Renaming Successful')
 
 	os.remove(logfile)
@@ -197,7 +197,7 @@ def getNums(path):
 	exts = ['mkv', 'mp4', 'avi', 'flv', 'mpg', 'mpeg', 'wmv']
 
 	for i in os.listdir(path):
-		if not os.path.isfile(path + '\\' + i):
+		if not os.path.isfile(path + '/' + i):
 			continue
 		fname = i
 		ext = getExtension(fname).lower()
