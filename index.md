@@ -5,7 +5,7 @@ title: Series Renamer
 
 <a name="intro"></a>
 <h2 id="intro">Introduction</h2>
-Series Renamer is a robust TV series renaming command-line application written in Python. It uses the TVDB API to fetch extra data about episodes and uses that to rename the files.
+Series Renamer is a robust TV series renaming command-line application written in Python 3. It uses the TVDB API to fetch extra data about episodes and uses that to rename the files.
 
 To start using it, you first need to install the script. For that, please follow these steps -
 
@@ -13,8 +13,9 @@ To start using it, you first need to install the script. For that, please follow
 * From the extracted folder, run
 
 ```bash
-# requires tvdb-api
 python setup.py install
+# sudo python3 setup.py install
+# for ubuntu/debian users
 ```
 
 
