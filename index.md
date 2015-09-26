@@ -38,9 +38,9 @@ series-renamer
 <a name="numbers"></a>
 <h2 id="numbers">Season and Episode Numbers</h2>
 The Season and Episode numbers are the base of Series Renamer. It scans through the file names and extracts the numbers which it thinks can be season number or episode number. 
-When in the user confirmation phase, it displays the detected season and episode number and gives option to the user to change it if need. Multi-episodes are supported as long as they are of the format *StartEp*-*EndEp* (example, *Friends [10x23-24] - The Last One.mkv*).
+When in the user confirmation phase, it displays the detected season and episode number and gives option to the user to change it if need. 
 
-For changing season number, it's 1 whereas for episode number, it's 2.
+For changing season number, use option 1 whereas for episode number, use 2.
 
 When changing season number, you can put these types of values.
 
@@ -54,6 +54,8 @@ When changing episode number, you can put these types of values.
 
 In case of season and episode numbers, any custom change made by the user (by pressing 1 or 2) is remembered by the script and used for future episodes. But when the number of 
 array items is equal to 1, then season number is set to `#N` or 0 and episode number is set to *array[0]*.
+
+Multi-episodes are supported as long as they are of the format *StartEp*-*EndEp* (example, *Friends [10x23-24] - The Last One.mkv*).
 
 
 <a name="config"></a>
@@ -72,7 +74,7 @@ The format to rename episodes. variables are enclosed in \{\{..\}\}. Common vari
 
 **replaces**
 
-Temporary find-and-replace script does when scanning file names for numbers. This feature can be used to rule out unwanted potential numbers and even fix detected numbers.
+Temporary find-and-replace, series-renamer does when scanning file names for numbers. This feature can be used to rule out unwanted potential numbers and even fix detected numbers.
 
 For example, my [One Piece episodes](examples/one_piece_mixed.html) had names like *one piece 657 -u0026 658.mp4*. Now as series-renamer only detects `N1 - N2` as multi-episode, so I replaced '-u0026' with '-'.
 Also some episodes were like *one piece 456 & 457 blah blah YouTube.mp4*. So I also replaced '&' with '-'.
@@ -97,3 +99,4 @@ NOTE - To prevent some number from being detected by series-renamer, precede it 
 <a name="examples"></a>
 <h2 id="examples">Examples</h2>
 Some sample logs created by series-renamer can be viewed from [examples/index.html](examples/index.html). To rename such badly named episodes, the 'replaces' config came very useful. 
+
