@@ -1,6 +1,6 @@
-# Series Renamer
+# Series Renamer (beta)
 
-Python script that connects to [tvdb.com](http://thetvdb.com) and renames your TV series in any fashion you want.
+Python script that connects to [thetvdb.com](http://thetvdb.com) and renames your TV series in any fashion you want.
 
 
 ### Why another series renamer ?
@@ -10,10 +10,10 @@ Now my One Piece episodes are named like `opdub283.mp4` . How do you expect them
 
 So I decided to make my own *series renamer*. To be able to rename (fix) even badly named files like the above, my script -
 
-* takes a folder non-recursively
-* gets the name of the TV/Anime series the folder contains from the user
+* scans the working directory non-recursively
+* gets the name of the TV/Anime series the folder has from the user
 * gets [TVDB](http://thetvdb.com) information of the TV series the user specified.
-* scans through the filenames for potential season numbers / episode numbers. Once you have the Series name and the season or episode number accurate, nothing can stop your tv series collection from having a proper name.
+* scans through the filenames for potential season numbers / episode numbers. Once you have the series name and the season/episode number accurate, nothing can stop your TV series collection from having a proper name.
 
 
 ## Installing
