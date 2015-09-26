@@ -1,6 +1,6 @@
 # Series Renamer
 
-Python script that connects to [tvdb.com](http://tvdb.com) and renames your TV series in any fashion you want.
+Python script that connects to [tvdb.com](http://thetvdb.com) and renames your TV series in any fashion you want.
 
 
 ### Why another series renamer ?
@@ -12,7 +12,8 @@ So I decided to make my own *series renamer*. To be able to rename (fix) even ba
 
 * takes a folder non-recursively
 * gets the name of the TV/Anime series the folder contains from the user
-* scans through the filenames for potential season numbers / episode numbers. Once you have the Series name and the Season/Episode accurate, nothing can stop your tv series collection from having a proper name.
+* gets [TVDB](http://thetvdb.com) information of the TV series the user specified.
+* scans through the filenames for potential season numbers / episode numbers. Once you have the Series name and the season or episode number accurate, nothing can stop your tv series collection from having a proper name.
 
 
 ## Installing
@@ -26,7 +27,7 @@ python setup.py install
 ## Using
 
 * Open **command prompt** aka **terminal** in the directory you want to scan and run the following command.
-```bash
+```
 series-renamer
 ```
 * Give the series name. Make sure you write the name as precisely as possible.
@@ -36,11 +37,19 @@ series-renamer
 * Confirm with (y) and all episodes in the folder will be renamed.
 
 
+## Features
+
+* Customizable episode renaming format.
+* Works even without season information in the filename. It then uses episode_number as the absolute episode_number of the TV Series.
+* You can explictly specify season and episode number at runtime.
+* More [features](http://aviaryan.github.io/series-renamer/index.html#config) to make sure your tv collection is properly detected and renamed.
+
+
 ## Examples
 
-Some sample logs created by series-renamer can be found in the [examples](https://github.com/aviaryan/series-renamer/tree/gh-pages/examples) folder. You can view them from [this link](http://aviaryan.github.io/series-renamer/examples/index.html)
+Some sample logs created by series-renamer can be found in the [examples](https://github.com/aviaryan/series-renamer/tree/gh-pages/examples) folder. You can view them online from [this link](http://aviaryan.github.io/series-renamer/examples/index.html)
 
 
 ## Important
 
-It is recommended you read [How to rename](docs/how_to_rename.md) to be fully comfortable with Series Renamer.
+It is recommended you read [some docs](http://aviaryan.github.io/series-renamer/index.html#numbers) to be fully comfortable with Series Renamer.
