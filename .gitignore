@@ -6,3 +6,5 @@ series_renamer.egg-info
 .idea
 test.py
 examples
+_site
+assets

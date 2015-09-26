@@ -47,7 +47,11 @@ def run():
 	"""
 	Runs the script from the setuptools entry point
 	"""
-	main( os.getcwd() )
+	if len( argv ) > 1:
+		if argv[1] == 'config':
+			editConfig()
+	else:
+		main( os.getcwd() )
 
 
 def main(path='.'):
@@ -349,4 +353,8 @@ def throwError(msg):
 # Main
 
 if __name__ == "__main__":
-	main()
+	if len(argv) > 1:
+		if argv[1] == 'config':
+			editConfig()
+	else:
+		main()
