@@ -19,8 +19,10 @@ So I decided to make my own *series renamer*. To be able to rename (fix) even ba
 ## Installing
 
 Download the zip.
-```
+```bash
 python setup.py install
+# python3 setup.py install
+# for ubuntu/debian users
 ```
 
 

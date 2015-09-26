@@ -14,7 +14,9 @@ from platform import system
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 
-# if version_info < (3,0):
+if version_info < (3,0):
+	throwError('Python 2 not supported')
+
 
 namingFormat = ''
 configs = ''
