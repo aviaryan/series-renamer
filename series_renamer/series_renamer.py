@@ -183,7 +183,10 @@ def main(path='.'):
 
 	if x == 'y':
 		for i in renames.items():
-			os.rename(path + '/' + i[0], path + '/' + i[1])
+			if os.path.isfile(path + '/' + i[1]):
+				warn('File {0} exists, skipping'.format(i[1]))
+			else:
+				os.rename(path + '/' + i[0], path + '/' + i[1])
 		print('Renaming Successful')
 
 	os.remove(logfile)
