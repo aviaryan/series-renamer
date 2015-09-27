@@ -199,7 +199,7 @@ def getNums(path):
 	Stores them in epns
 	"""
 
-	exts = ['mkv', 'mp4', 'avi', 'flv', 'mpg', 'mpeg', 'wmv']
+	exts = ['mkv', 'mp4', 'avi', 'flv', 'mpg', 'mpeg', 'wmv', 'webm', 'vob', 'mov', '3gp', 'ogv']
 
 	for i in os.listdir(path):
 		if not os.path.isfile(path + '/' + i):
