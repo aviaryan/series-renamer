@@ -6,7 +6,7 @@ Python script that connects to [thetvdb.com](http://thetvdb.com) and renames you
 ### Why another series renamer ?
 
 Other series renaming scripts I tried follow a very error-prone procedure. They scan each filename independently and try to extract all information about the episode from that.
-Now my One Piece episodes are named like `opdub283.mp4` . How do you expect them to extract any info from this ?
+Now my One Piece episodes are named like `opdub283.mp4` and `---one piece episode 691 -u0026 692 english sub full hd.mp4` . How do you expect them to extract any info from this ?
 
 So I decided to make my own *series renamer*. To be able to rename (fix) even badly named files like the above, my script -
 
@@ -34,7 +34,7 @@ series-renamer
 ```
 * Give the series name. Make sure you write the name as precisely as possible.
 * The script will connect to TVDB and then scan the filenames. After that it will give you suggestions on the season numbers/episode numbers of files.
-* Choose the appropriate option and move forward.
+* Choose the appropriate option and move forward. Use option 'a' (automatic) if possible.
 * In the end the script will create a log (series-renamer-log.html) in the root of the folder that was currently examined.
 * Confirm with (y) and all episodes in the folder will be renamed.
 
@@ -44,6 +44,7 @@ series-renamer
 * Customizable episode renaming format.
 * Works even without season information in the filename. It then uses episode_number as the absolute episode_number of the TV Series.
 * You can explictly specify season and episode number at runtime.
+* Supports multi-episodes separated by hyphen like `Friends [10x23-24].mkv`.
 * More [features](http://aviaryan.github.io/series-renamer/index.html#config) to make sure your tv collection is properly detected and renamed.
 
 
