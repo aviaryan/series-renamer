@@ -67,7 +67,7 @@ def main(path='.'):
 
 	loadConfig()
 	print("What's the series name ? Write it as precise as possible.")
-	sname = input()
+	sname = input('> ')
 	getNums(path)
 	print("Fetching Series data from TVDB")
 	seriesObj = getSeries(sname)
@@ -100,8 +100,8 @@ def main(path='.'):
 			done = 1
 			if allgo == 0:
 				print('Array', i[1])
-				print("Yes (y) , No (n) , All (a) , Stop (s) , Season change (1) , Episode change (2)")
-				x = input().lower()
+				print("Option : Yes (y) , No (n) , All (a) , Stop (s) , Season change (1) , Episode change (2)")
+				x = input('> ').lower()
 				if x == 'y': 
 					continue
 				elif x == 'n':
@@ -113,7 +113,7 @@ def main(path='.'):
 					break
 				elif x == '1':
 					print('New season (-1, 0-{0}, #NUM) : '.format(len(i[1])-1), end='')
-					ps = input()
+					ps = input('>> ')
 					if ps[0] == '#':
 						mys = int(ps[1:])
 					elif int(ps) < 0:
@@ -123,7 +123,7 @@ def main(path='.'):
 					done = 0
 				elif x == '2':
 					print('New episode (0-{0}) : '.format(len(i[1])-1), end='')
-					pep = int(input())
+					pep = int(input('>> '))
 					if pep < len(i[1]) and pep >= 0:
 						myep = i[1][pep]
 					done = 0
@@ -179,7 +179,7 @@ def main(path='.'):
 
 	print("Log created at " + logfile)
 	print("Do you approve renaming ? (y/n)")
-	x = input().lower()
+	x = input('> ').lower()
 
 	if x == 'y':
 		for i in renames.items():

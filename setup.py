@@ -9,10 +9,10 @@ setup(
     install_requires = ['tvdb-api'],
 
     name = "series-renamer",
-    version = "0.1",
+    version = "0.2",
     author = "Avi Aryan",
     author_email = "avi.aryan123@gmail.com",
-    description = "Renames your tv series",
+    description = "Robust TV Series Renamer",
     license = "Apache",
     keywords = "series tv-series tvdb renamer",
     url = "http://github.com/aviaryan/series-renamer",
