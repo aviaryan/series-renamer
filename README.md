@@ -63,3 +63,7 @@ It is recommended you read [some docs](http://aviaryan.github.io/series-renamer/
 * tvdb-api
 * Python 3
 
+
+## Questions ?
+
+Just create an [issue](https://github.com/aviaryan/series-renamer/issues), I will be glad to be of any help.
