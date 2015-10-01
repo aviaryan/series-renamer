@@ -13,6 +13,7 @@ from platform import system
 
 from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
+from tvdb_api import tvdb_seasonnotfound
 
 if version_info < (3,0):
 	throwError('Python 2 not supported')
@@ -72,7 +73,6 @@ def main(path='.'):
 	print("Fetching Series data from TVDB")
 	seriesObj = getSeries(sname)
 
-	print()
 	ps = '0'
 	pep = 1
 	allgo = done = dont = stop = 0
@@ -95,8 +95,9 @@ def main(path='.'):
 			myep= i[1][0]
 
 		while done == 0:
+			print()
 			print( trimUnicode(i[0]) )
-			print("S " + str(mys) + " , E " + str(myep))
+			print("Detected [Season " + str(mys) + ", Episode " + str(myep) + "]")
 			done = 1
 			if allgo == 0:
 				print('Array', i[1])
@@ -147,8 +148,11 @@ def main(path='.'):
 				mys = str(epd['seasonnumber'])
 				epd['absolute_number'] = myep.replace(' ','')
 			else:
-				epd = seriesObj[ int(mys) ][r_myep]
-				epd['episodenumber'] = myep.replace(' ','')
+				try:
+					epd = seriesObj[ int(mys) ][r_myep]
+					epd['episodenumber'] = myep.replace(' ','')
+				except tvdb_seasonnotfound as e:
+					throwError( '{}'.format(e.args[-1]) )
 
 			# check namingformat agains all available attributes
 			tempmissing = isNameInvalid(epd)
@@ -209,7 +213,7 @@ def getNums(path):
 		for k in configs['replaces'].items():
 			fname = fname.replace(k[0], k[1])
 		if ext in exts:
-			tobj = re.findall("(?i)((^|.)\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]\)\(\[$])", fname, re.DOTALL) # because of 2 () 2 capturing groups
+			tobj = re.findall("(?i)((^|.)\d+(\s*\-\s*\d+)?)(?=[\. ex\-\]\)\(\[$_])", fname, re.DOTALL) # because of 2 () 2 capturing groups
 			# (?=[\. ex\-\]\)\(\[$])
 			if len(tobj):
 				epns[i] = tobj
