@@ -18,7 +18,7 @@ So I decided to make my own *series renamer*. To be able to rename (fix) even ba
 
 ## Installing
 
-Download the zip.
+Download the zip and extract it.
 ```bash
 python setup.py install
 # python3 setup.py install
@@ -50,7 +50,7 @@ series-renamer
 
 ## Examples
 
-Some sample logs created by series-renamer can be found in the [examples](https://github.com/aviaryan/series-renamer/tree/gh-pages/examples) folder. You can view them online from [this link](http://aviaryan.github.io/series-renamer/examples/index.html)
+Some sample logs created by series-renamer can be viewed from [this link](http://aviaryan.github.io/series-renamer/examples/index.html).
 
 
 ## Important
