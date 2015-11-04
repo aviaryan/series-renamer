@@ -26,12 +26,31 @@ epns = {}
 renames = {}
 
 
+def createConfig(fpath):
+	'''
+	Creates the config file if needed
+	'''
+	if not os.path.isfile(fpath):
+		x = {
+			"namingFormat": "{{sname}} [{{seasonnumber}}x{{episodenumber}}] - {{episodename}}",
+			"_commented_namingFormat": "{{sname}} E{{absolute_number}} - {{episodename}}",
+			"replaces": {
+				"&": "-",
+				"YouTube_": "~"
+			}
+		}
+		ptr = open(fpath, 'w')
+		ptr.write(json.dumps(x, indent=4))
+		ptr.close()
+
+
 def loadConfig():
 	"""
 	Loads Configuration data from the config.json file
 	"""
 	global namingFormat, configs
 	fpath = os.path.dirname(os.path.realpath(__file__)) + '/config.json'
+	createConfig(fpath)
 	with open(fpath) as data:
 		configs = json.load(data)
 	namingFormat = configs['namingFormat']
@@ -42,6 +61,7 @@ def editConfig():
 	Opens the config in default editor
 	"""
 	fpath = os.path.dirname(os.path.realpath(__file__)) + '/config.json'
+	createConfig(fpath)
 	if system() == 'darwin':
 		call(('open', fpath))
 	elif os.name == 'nt':
@@ -72,6 +92,7 @@ def main(path='.'):
 	getNums(path)
 	print("Fetching Series data from TVDB")
 	seriesObj = getSeries(sname)
+	printShowInfo(seriesObj)
 
 	ps = '0'
 	pep = 1
@@ -152,7 +173,11 @@ def main(path='.'):
 					epd = seriesObj[ int(mys) ][r_myep]
 					epd['episodenumber'] = myep.replace(' ','')
 				except tvdb_seasonnotfound as e:
-					throwError( '{}'.format(e.args[-1]) )
+					warn( 'Season not found : ' + '{}'.format(e.args[-1]) )
+					continue
+				except tvdb_api.tvdb_episodenotfound as e:
+					warn( 'Episode not found : ' + '{}'.format(e.args[-1]) )
+					continue
 
 			# check namingformat agains all available attributes
 			tempmissing = isNameInvalid(epd)
@@ -300,6 +325,22 @@ def fixName(s):
 
 
 # More Functions
+
+def printShowInfo(obj):
+	'''
+	Displays basic show info on the terminal
+	'''
+	drawline('-', '#'*80)
+	print('Series name       : ', obj['seriesname'])
+	print('Overview          : ', obj['overview'])
+	c = -1
+	try:
+		tvar = obj[0]
+	except tvdb_api.tvdb_seasonnotfound:
+		c = 0
+	print('Number of seasons : ', len(obj)+c)
+	drawline('-', '#'*80)
+
 
 def getExtension(fname):
 	"""

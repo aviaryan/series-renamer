@@ -17,6 +17,9 @@ setup(
     keywords = "series tv-series tvdb renamer",
     url = "http://github.com/aviaryan/series-renamer",
     packages=['series_renamer'],
+    exclude_package_data = {
+        '': ['config.json']
+    },
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 3 - Beta",
