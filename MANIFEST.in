@@ -1,1 +1,2 @@
 recursive-include series_renamer *
+global-exclude __pycache__/*
