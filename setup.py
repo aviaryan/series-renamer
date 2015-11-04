@@ -9,7 +9,7 @@ setup(
     install_requires = ['tvdb-api'],
 
     name = "series-renamer",
-    version = "0.2",
+    version = "0.3",
     author = "Avi Aryan",
     author_email = "avi.aryan123@gmail.com",
     description = "Robust TV Series Renamer",
@@ -22,9 +22,10 @@ setup(
     },
     long_description=read('README.md'),
     classifiers=[
-        "Development Status :: 3 - Beta",
+        "Development Status :: 4 - Beta",
         "Topic :: Utilities",
-        "License :: Apache License v2.0",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python :: 3 :: Only"
     ],
     include_package_data=True, # needed for MANIFEST
 
