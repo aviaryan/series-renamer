@@ -1,4 +1,4 @@
-# Series Renamer (beta)
+# Series Renamer
 
 Python script that connects to [thetvdb.com](http://thetvdb.com) and renames your TV series in any fashion you want.
 
