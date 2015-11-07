@@ -22,7 +22,7 @@ if version_info < (3,0):
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'
-VERSION = '0.3'
+VERSION = '0.51'
 epns = {}
 renames = {}
 
