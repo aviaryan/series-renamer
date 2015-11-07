@@ -7,15 +7,10 @@ title: Series Renamer
 <h2 id="intro">Introduction</h2>
 Series Renamer is a robust TV series renaming command-line application written in Python 3. It uses the TVDB API to fetch extra data about episodes and uses that to rename the files.
 
-To start using it, you first need to install the script. For that, please follow these steps -
-
-* [Download zip](https://github.com/aviaryan/series-renamer/archive/master.zip) and extract it.
-* From the extracted folder, run
-
+To start using it, you first need to install the script.
 ```bash
-python setup.py install
-# sudo python3 setup.py install
-# for ubuntu/debian users
+pip install series-renamer
+# pip3 for ubuntu
 ```
 
 
@@ -29,7 +24,8 @@ series-renamer
 ```
 
 * Give the series name. Make sure you write the name as precisely as possible.
-* The script will connect to TVDB and then scan the filenames. After that it will give you suggestions on the season numbers/episode numbers of files.
+* The script will connect to TVDB, fetch show info and display it on the terminal.
+* Then it will scan the filenames. After that it will give you suggestions on the season numbers/episode numbers of files.
 * Choose the appropriate option and move forward.
 * In the end the script will create a log (series-renamer-log.html) in the root of the folder that was currently examined.
 * Confirm with (y) and all episodes in the folder will be renamed.
@@ -55,7 +51,7 @@ When changing episode number, you can put these types of values.
 In case of season and episode numbers, any custom change made by the user (by pressing 1 or 2) is remembered by the script and used for future episodes. But when the number of 
 array items is equal to 1, then season number is set to `#N` or 0 and episode number is set to *array[0]*.
 
-Multi-episodes are supported as long as they are of the format *StartEp*-*EndEp* (example, *Friends [10x23-24] - The Last One.mkv*).
+Multi-episodes are supported as long as they are of the format *StartEp*-*EndEp* (example, *Friends [10x17-18] - The Last One.mkv*).
 
 
 <a name="config"></a>
