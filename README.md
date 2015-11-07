@@ -21,11 +21,13 @@ So I decided to make my own *series renamer*. To be able to rename (fix) even ba
 
 ## Installing
 
-Download the zip and extract it.
+```bash
+pip install series-renamer
+# pip3 for ubuntu
+```
+or download the zip and extract it.
 ```bash
 python setup.py install
-# python3 setup.py install
-# for ubuntu/debian users
 ```
 
 
