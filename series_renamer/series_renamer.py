@@ -22,7 +22,7 @@ if version_info < (3,0):
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'
-VERSION = '0.51'
+VERSION = '0.6'
 epns = {}
 renames = {}
 
@@ -71,13 +71,37 @@ def editConfig():
 		call(('xdg-open', fpath))
 
 
+def showHelp():
+	'''
+	Shows the help
+	'''
+	printexit(
+		(
+		"series-renamer helps you properly name you tv/anime series episodes. Just start this application in the folder of your TV series and you are ready to go.\n"
+		"\n"
+		"Optional Arguments\n"
+		"\n"
+		"--config:         Edit config.json (linux users may need to add sudo)\n"
+		"-H or --help:     Show help\n"
+		"-V or --version:  Show version information"
+		)
+	)
+
+
 def run():
 	"""
 	Runs the script from the setuptools entry point
 	"""
 	if len( argv ) > 1:
-		if argv[1] == 'config':
+		if argv[1] == '--config':
 			editConfig()
+		elif argv[1] == '-H' or argv[1] == '--help':
+			showHelp()
+		elif argv[1] == '-V' or argv[1] == '--version':
+			printexit(VERSION)
+		else:
+			print('Incorrect arguments\n')
+			showHelp()
 	else:
 		main( os.getcwd() )
 
@@ -406,11 +430,18 @@ def throwError(msg):
 	sysexit()
 
 
+def printexit(msg, code=0):
+	'''
+	Prints and exists
+	'''
+	print(msg)
+	sysexit(code)
+
 # Main
 
 if __name__ == "__main__":
 	if len(argv) > 1:
-		if argv[1] == 'config':
+		if argv[1] == '--config':
 			editConfig()
 	else:
 		main()

@@ -9,7 +9,7 @@ setup(
     install_requires = ['tvdb-api'],
 
     name = "series-renamer",
-    version = "0.51",
+    version = "0.6",
     author = "Avi Aryan",
     author_email = "avi.aryan123@gmail.com",
     description = "Robust TV Series Renamer",
