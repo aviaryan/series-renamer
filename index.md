@@ -57,11 +57,11 @@ Multi-episodes are supported as long as they are of the format *StartEp*-*EndEp*
 
 <a name="config"></a>
 <h2 id="config">Configuration</h2>
-Series Renamer can be configured by calling `series-renamer config`. This will open the [config.json](https://github.com/aviaryan/series-renamer/blob/master/series_renamer/config.json) file in the default text editor. There are currently 2 settings in series-renamer.
+Series Renamer can be configured by calling `series-renamer --config`. This will open the [config.json](https://github.com/aviaryan/series-renamer/blob/master/series_renamer/config.json) file in the default text editor. There are currently 2 settings in series-renamer.
 
 **namingFormat**
 
-The format to rename episodes. variables are enclosed in \{\{..\}\}. Common variables are - 
+The format to rename episodes. Variables are enclosed in \{\{..\}\}. Common variables are - 
 
 * episodename
 * episodenumber
