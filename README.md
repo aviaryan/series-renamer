@@ -1,6 +1,6 @@
 # Series Renamer v0.7
 
-<!-- [![Version](https://img.shields.io/pypi/v/series-renamer.svg)](https://pypi.python.org/pypi/series-renamer) -->
+[![Version](https://img.shields.io/pypi/v/series-renamer.svg)](https://pypi.python.org/pypi/series-renamer)
 [![Downloads](https://img.shields.io/pypi/dw/series-renamer.svg)](https://pypi.python.org/pypi/series-renamer)
 
 Python script that connects to [thetvdb.com](http://thetvdb.com) and renames your TV series in any fashion you want.
