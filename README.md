@@ -50,6 +50,7 @@ series-renamer
 * Works even without season information in the filename. It then uses episode_number as the absolute episode_number of the TV Series.
 * You can explictly specify season and episode number at runtime.
 * Supports multi-episodes separated by hyphen like `Friends [10x17-18].mkv`.
+* Subtitle files are automatically renamed.
 * More [extra configurations](http://aviaryan.github.io/series-renamer/index.html#config) to make sure your tv collection is properly detected and renamed.
 
 
