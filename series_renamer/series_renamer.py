@@ -22,7 +22,7 @@ if version_info < (3,0):
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'
-VERSION = '0.7'
+VERSION = '1.0.0'
 epns = {}
 renames = {}
 
@@ -77,7 +77,8 @@ def showHelp():
 	'''
 	printexit(
 		(
-		"series-renamer helps you properly name you tv/anime series episodes. Just start this application in the folder of your TV series and you are ready to go.\n"
+		"\n"
+		"Series Renamer helps you properly name you tv/anime series episodes. Just start this application in the folder of your TV series and you are ready to go.\n"
 		"\n"
 		"Optional Arguments\n"
 		"\n"
