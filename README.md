@@ -51,7 +51,7 @@ series-renamer
 * You can explictly specify season and episode number at runtime.
 * Supports multi-episodes separated by hyphen like `Friends [10x17-18].mkv`.
 * Subtitle files are automatically renamed.
-* More [extra configurations](http://aviaryan.github.io/series-renamer/index.html#config) to make sure your tv collection is properly detected and renamed.
+* More [extra configurations](https://github.com/aviaryan/series-renamer/wiki#configjson) to make sure your tv collection is properly detected and renamed.
 
 
 ## Examples
@@ -61,7 +61,7 @@ Some sample logs created by series-renamer can be viewed from [this link](http:/
 
 ## Important
 
-It is recommended you read [some docs](http://aviaryan.github.io/series-renamer/index.html#numbers) to be fully comfortable with Series Renamer.
+It is recommended you read [some docs](https://github.com/aviaryan/series-renamer/wiki) to be fully comfortable with Series Renamer.
 
 
 ## Requirements
