@@ -1,4 +1,4 @@
-# Series Renamer v0.7
+# Series Renamer
 
 [![Version](https://img.shields.io/pypi/v/series-renamer.svg)](https://pypi.python.org/pypi/series-renamer)
 [![Downloads](https://img.shields.io/pypi/dw/series-renamer.svg)](https://pypi.python.org/pypi/series-renamer)
