@@ -22,7 +22,7 @@ if version_info < (3,0):
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'
-VERSION = '0.6'
+VERSION = '0.7'
 epns = {}
 renames = {}
 
@@ -241,6 +241,7 @@ def main(path='.'):
 				warn('File {0} exists, skipping'.format(i[1]))
 			else:
 				os.rename(path + '/' + i[0], path + '/' + i[1])
+				subtitleRename(path + '/' + i[0], path + '/' + i[1])
 		print('Renaming Successful')
 
 	os.remove(logfile)
@@ -374,6 +375,19 @@ def getExtension(fname):
 	"""
 	a = fname.rfind('.')
 	return fname[a+1:]
+
+
+def subtitleRename(old, new):
+	'''
+	Renames subtitles a/c the file rename
+	'''
+	namebase = old[:old.rfind('.')]
+	newnamebase = new[:new.rfind('.')]
+	sub_formats = ['srt', 'sub', 'sbv', 'ttxt', 'usf', 'smi'] # https://en.wikipedia.org/wiki/Subtitle_(captioning)#Subtitle_formats
+	for ext in sub_formats:
+		if os.path.isfile(namebase + '.' + ext):
+			print('Subtitle found, renaming..')
+			os.rename(namebase + '.' + ext, newnamebase + '.' + ext)
 
 
 def trimUnicode(s):
