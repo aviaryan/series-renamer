@@ -179,7 +179,7 @@ def main(path='.'):
 					print('Invalid option. Try Again')
 					done = 0
 
-		if dont == 0:
+		if dont == 0: # if not not do it
 			ext = getExtension(i[0])
 			r_myep = str2Int(myep)
 			if mys == 0:
@@ -218,7 +218,7 @@ def main(path='.'):
 			break
 
 	if stop:
-		return 0
+		return 1
 
 	logfile = path + '/series_renamer_log.html'
 	copyanything( os.path.dirname(os.path.realpath(__file__)) + '/logs.html', logfile )
@@ -362,7 +362,7 @@ def printShowInfo(obj):
 	print('Overview          : ', obj['overview'])
 	c = -1
 	try:
-		tvar = obj[0]
+		obj[0]
 	except tvdb_api.tvdb_seasonnotfound:
 		c = 0
 	print('Number of seasons : ', len(obj)+c)
@@ -410,6 +410,7 @@ def copyanything(src, dst):
 			shutil.copy(src, dst)
 		else: raise
 	return
+
 
 def str2Int(num):
 	"""
