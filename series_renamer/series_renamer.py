@@ -150,11 +150,11 @@ def main(path='.'):
 				print('Array', i[1])
 				print("Option : Yes (y) , No (n) , All (a) , Stop (s) , Season change (1) , Episode change (2)")
 				x = input('> ').lower()
-				if x == 'y': 
+				if x == 'y':
 					continue
 				elif x == 'n':
 					dont = 1
-				elif x == 'a': 
+				elif x == 'a':
 					allgo = 1
 				elif x == 's':
 					dont = stop = 1
@@ -371,7 +371,7 @@ def printShowInfo(obj):
 
 def getExtension(fname):
 	"""
-	Gets extension from the file name. 
+	Gets extension from the file name.
 	Returns without the dot (.)
 	"""
 	a = fname.rfind('.')
@@ -452,6 +452,7 @@ def printexit(msg, code=0):
 	'''
 	print(msg)
 	sysexit(code)
+
 
 # Main
 
