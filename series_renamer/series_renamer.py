@@ -27,7 +27,7 @@ else:
 namingFormat = ''
 configs = ''
 ENC = 'utf-8'
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 epns = {}
 renames = {}
 
