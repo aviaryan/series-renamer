@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+from io import open
+# ^^ works with encoding param in Py 2
 import os
 import re
 import json
@@ -15,8 +17,11 @@ from tvdb_api import tvdb_error
 from tvdb_api import tvdb_shownotfound
 from tvdb_api import tvdb_seasonnotfound
 
+# Version Compat
 if version_info < (3,0):
-	throwError('Python 2 not supported')
+	input = raw_input
+else:
+	unicode = str
 
 
 namingFormat = ''
@@ -41,7 +46,7 @@ def createConfig(fpath):
 			}
 		}
 		ptr = open(fpath, 'w')
-		ptr.write(json.dumps(x, indent=4))
+		ptr.write(unicode(json.dumps(x, indent=4)))
 		ptr.close()
 
 
@@ -229,7 +234,7 @@ def main(path='.'):
 	html = html.replace('{{dir}}', os.getcwd(), 1)
 	html = html.replace('{{content}}', strLog, 1)
 	fpt = open(logfile, 'w', encoding=ENC)
-	fpt.write(html)
+	fpt.write(unicode(html))
 	fpt.close()
 
 	print("Log created at " + logfile)

@@ -23,9 +23,9 @@ So I decided to make my own *series renamer*. To be able to rename (fix) even ba
 
 ```bash
 pip install series-renamer
-# pip3 for ubuntu
 ```
 or download the zip and extract it.
+
 ```bash
 python setup.py install
 ```
@@ -67,7 +67,6 @@ It is recommended you read [some docs](https://github.com/aviaryan/series-rename
 ## Requirements
 
 * tvdb-api
-* Python 3
 
 
 ## Questions ?
