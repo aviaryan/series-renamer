@@ -8,3 +8,4 @@ test.py
 examples
 _site
 assets
+*.pyc
