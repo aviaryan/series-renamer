@@ -11,7 +11,6 @@ To start using it, you first need to install the script.
 
 ```bash
 pip install series-renamer
-# pip3 for ubuntu
 ```
 
 
