@@ -65,11 +65,6 @@ Some sample logs created by series-renamer can be viewed from [this link](http:/
 It is recommended you read [some docs](https://github.com/aviaryan/series-renamer/wiki) to be fully comfortable with Series Renamer.
 
 
-## Requirements
-
-* tvdb-api
-
-
 ## Questions ?
 
 Just create an [issue](https://github.com/aviaryan/series-renamer/issues), I will be glad to be of any help.
