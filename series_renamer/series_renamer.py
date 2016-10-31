@@ -7,8 +7,8 @@ import re
 import json
 import tvdb_api
 import shutil, errno
+import argparse
 from subprocess import call as call
-from sys import argv
 from sys import exit as sysexit
 from sys import version_info
 from platform import system
@@ -76,38 +76,42 @@ def editConfig():
 		call(('xdg-open', fpath))
 
 
-def showHelp():
-	'''
-	Shows the help
-	'''
-	printexit(
-		(
-		"\n"
-		"Series Renamer helps you properly name you tv/anime series episodes. Just start this application in the folder of your TV series and you are ready to go.\n"
-		"\n"
-		"Optional Arguments\n"
-		"\n"
-		"--config:         Edit config.json (linux users may need to add sudo)\n"
-		"-H or --help:     Show help\n"
-		"-V or --version:  Show version information"
-		)
-	)
-
-
 def run():
 	"""
 	Runs the script from the setuptools entry point
 	"""
-	if len( argv ) > 1:
-		if argv[1] == '--config':
-			editConfig()
-		elif argv[1] == '-H' or argv[1] == '--help':
-			showHelp()
-		elif argv[1] == '-V' or argv[1] == '--version':
-			printexit(VERSION)
-		else:
-			print('Incorrect arguments\n')
-			showHelp()
+	# Parse the command line
+	argparser = argparse.ArgumentParser(
+		description=
+		(
+			"Series Renamer helps you properly name you tv/anime series episodes. "
+			"Just start this application in the folder of your TV series and you are "
+			"ready to go."
+		),
+		add_help=False,  # Allows changing of help flag from -h to -H
+	)
+	argparser.add_argument(
+		"--version",
+		"-V",
+		action="version",
+		version=VERSION,
+	)
+	argparser.add_argument(
+		"--help",
+		"-H",
+		action="help",
+		help="show this help message and exit",
+	)
+	argparser.add_argument(
+		"--config",
+		action="store_true",
+		help="open the config file for editing and exit (linux users may need to add sudo)",
+	)
+
+	args = argparser.parse_args()
+
+	if args.config:
+		editConfig()
 	else:
 		main( os.getcwd() )
 
@@ -451,19 +455,7 @@ def throwError(msg):
 	sysexit()
 
 
-def printexit(msg, code=0):
-	'''
-	Prints and exists
-	'''
-	print(msg)
-	sysexit(code)
-
-
 # Main
 
 if __name__ == "__main__":
-	if len(argv) > 1:
-		if argv[1] == '--config':
-			editConfig()
-	else:
-		main()
+	run()
